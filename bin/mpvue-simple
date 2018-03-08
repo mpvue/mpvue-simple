@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var argv = require('yargs').argv;
+
+if (argv.build) {
+  require('../build/build.js')
+} else {
+  require('../build/dev-server.js')
+}
