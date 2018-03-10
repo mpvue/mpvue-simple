@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const { upgradeLogger } = require('../utils/index')
+upgradeLogger()
+
 var argv = require('yargs').argv;
 
 if (argv.build) {
