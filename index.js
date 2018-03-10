@@ -1,3 +1,6 @@
+const { upgradeLogger } = require('./utils/index')
+upgradeLogger()
+
 const injectArgvOptions = require('./config/argv').injectArgvOptions
 
 function build (argvOptions) {
