@@ -1,6 +1,6 @@
 {
   "name": "mpvue-simple",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "辅助 mpvue 快速开发 Page / Component 级小程序页面的工具",
   "main": "index.js",
   "bin": "bin/mpvue-simple",
@@ -11,9 +11,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "mpvue": "^1.0.1",
-    "mpvue-loader": "^1.0.2",
-    "mpvue-template-compiler": "^1.0.1",
+    "mpvue": "^1.0.3",
+    "mpvue-loader": "^1.0.4",
+    "mpvue-template-compiler": "^1.0.3",
     "mpvue-webpack-target": "^1.0.0",
     "postcss-mpvue-wxss": "^1.0.0",
     "px2rpx-loader": "^0.1.8",
