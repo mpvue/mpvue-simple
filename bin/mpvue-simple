@@ -5,6 +5,11 @@ upgradeLogger()
 
 var argv = require('yargs').argv;
 
+if (argv.version || argv.v) {
+  const { version } = require('../package.json')
+  return process.stdout.write(version)
+}
+
 if (argv.build) {
   require('../build/build.js')
 } else {

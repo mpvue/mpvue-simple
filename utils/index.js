@@ -11,7 +11,7 @@ function upgradeLogger () {
   const latestVesion = pkg['dist-tags'].latest
 
   if (latestVesion !== currPkg.version) {
-    console.log(`${pkgName} 有新版本 ${latestVesion} 啦，请注意升级。\n例如: npm install ${pkgName} -g\n`)
+    process.stdout.write(`${pkgName} 有新版本 ${latestVesion} 啦，请注意升级。\n例如: npm install ${pkgName} -g\n`)
   }
 }
 
