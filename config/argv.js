@@ -3,6 +3,7 @@ var fs = require('fs')
 var util = require('util')
 var resolve = require('resolve')
 var glob = require('glob')
+var webpack = require('webpack')
 // const { NpmAutoInstallWebpackPlugin } = require('npm-auto-install-webpack-plugin')
 
 function saveEntryMain(index, src, mpType) {
@@ -86,9 +87,9 @@ function mergeArgvConfig (config) {
   const floders = ['./src/', './mpvue-pages/']
   const searchFilters = ['./**/**/main.js', './**/**/app.vue', './**/**/App.vue', './**/**/index.vue']
   config.argvConfig = {
-    // plugins: [
-    //   new NpmAutoInstallWebpackPlugin()
-    // ]
+    plugins: [
+      // new NpmAutoInstallWebpackPlugin()
+    ]
   }
 
   // 拼接自定义的参数
@@ -99,6 +100,7 @@ function mergeArgvConfig (config) {
     component: argvComponent,         // true, undefined
     output: argvOutput,               // pathString, undefined
     config: argvCnf,                  // pathString, undefined
+    definePlugin: argvDefinePlugin,   // object, undefined
     ...resetConfig
   } = argv
   const mpType = argvComponent ? 'component' : 'page'
@@ -134,16 +136,6 @@ function mergeArgvConfig (config) {
     defConfig.assetsRoot = assetsRoot
   }
 
-  // 合并自定义 webpack config
-  if (typeof argvCnf === 'string') {
-    try {
-      config.argvConfig = require('webpack-merge')(config.argvConfig, require(path.resolve(argvCnf)))
-    } catch (e) { }
-  }
-
-  Object.assign(config.build, resetConfig, defConfig)
-  Object.assign(config.dev, resetConfig, defConfig)
-
   const allEntry = Object.keys(defConfig.entry)
 
   if (!allEntry.length) {
@@ -156,6 +148,21 @@ function mergeArgvConfig (config) {
       defConfig.entry[v] = saveEntryMain(i, v, mpType)
     }
   })
+
+  // DefinePlugin
+  if (argvDefinePlugin) {
+    config.argvConfig.plugins.push(new webpack.DefinePlugin(argvDefinePlugin))
+  }
+
+  // 合并自定义 webpack config
+  if (typeof argvCnf === 'string') {
+    try {
+      config.argvConfig = require('webpack-merge')(config.argvConfig, require(path.resolve(argvCnf)))
+    } catch (e) { }
+  }
+
+  Object.assign(config.build, resetConfig, defConfig)
+  Object.assign(config.dev, resetConfig, defConfig)
 
   return config
 }
