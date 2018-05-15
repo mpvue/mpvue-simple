@@ -5,7 +5,7 @@ const injectArgvOptions = require('./config/argv').injectArgvOptions
 
 function build (argvOptions) {
   injectArgvOptions(argvOptions)
-  return require('./build/build.js')
+  return require('./build/build.js')()
 }
 
 function devServer (argvOptions) {
