@@ -1,6 +1,6 @@
 {
   "name": "mpvue-simple",
-  "version": "1.0.11",
+  "version": "1.0.14",
   "description": "辅助 mpvue 快速开发 Page / Component 级小程序页面的工具",
   "main": "index.js",
   "bin": "bin/mpvue-simple",
