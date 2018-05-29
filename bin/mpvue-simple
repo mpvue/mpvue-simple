@@ -11,7 +11,7 @@ if (argv.version || argv.v) {
 }
 
 if (argv.build) {
-  require('../build/build.js')
+  require('../build/build.js')()
 } else {
   require('../build/dev-server.js')
 }
