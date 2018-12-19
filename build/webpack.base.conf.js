@@ -4,6 +4,7 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
+// 建议直接使用path.resolve函数
 function resolve (dir) {
   return path.resolve(dir)
 }
@@ -12,8 +13,14 @@ const entry = process.env.NODE_ENV === 'production'
   ? config.build.entry
   : config.dev.entry
 
-const modules = [path.join(__dirname, '../'), path.join(__dirname, '../node_modules'), resolve('./'), resolve('./node_modules')]
-
+// 建议统一使用resolve，更直观
+const modules = [
+  path.join(__dirname, '../'), // mpvue-simple的项目根路径，用于解析babel/postcss等配置文件时的寻址
+  path.join(__dirname, '../node_modules'), // mpvue-simple项目的依赖存放路径，用于获取mpvue-simple的依赖
+  path.join(__dirname, '../../node_modules'), // 当mpvue-simple被其他构建工程依赖时，部分依赖会被铺平到mpvue-simple同级
+  resolve('./'), // 项目当前路径
+  resolve('./node_modules') // 项目的依赖
+]
 // mp compiler 全局模式下注入 babelrc
 vueLoaderConfig.globalBabelrc = path.resolve(__dirname, '../.babelrc')
 
