@@ -1,9 +1,15 @@
 // https://github.com/michael-ciniawsky/postcss-load-config
 
+const autoprefixer = require('autoprefixer')
+const postcssMpvueWxss = require('postcss-mpvue-wxss')
+
+/**
+ * 优先使用simple的依赖
+ * 解决字符串写法只在业务项目中寻找依赖的问题
+ */
 module.exports = {
-  "plugins": {
-    // to edit target browsers: use "browserslist" field in package.json
-    "autoprefixer": {},
-    "postcss-mpvue-wxss": {}
-  }
+  plugins:[
+    autoprefixer({}),
+    postcssMpvueWxss({})
+  ]
 }

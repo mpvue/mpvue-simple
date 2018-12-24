@@ -15,9 +15,18 @@ function devServer (argvOptions) {
 
 exports.build = build
 exports.devServer = devServer
-exports.getWebpackConfig = function () {
+
+
+exports.getWebpackConfig = function (argvOptions) {
+  if(argvOptions) { // 向前兼容
+    injectArgvOptions(argvOptions)
+  }
+
   return require('./build/webpack.prod.conf')
 }
-exports.getDevWebpackConfig = function () {
-  require('./build/webpack.dev.conf')
+exports.getDevWebpackConfig = function (argvOptions) {
+  if(argvOptions) { // 向前兼容
+    injectArgvOptions(argvOptions)
+  }
+  return require('./build/webpack.dev.conf')
 }
