@@ -8,3 +8,36 @@
 
 bug 或者交流建议等请反馈到 [mpvue/issues](https://github.com/Meituan-Dianping/mpvue/issues)。
 
+## example
+```
+const mpvueSimple = require('mpvue-simple')
+
+// build for signel Page
+mpvueSimple.build()
+
+// or more options
+mpvueSimple.build({
+  output: 'mp-pages',
+  pageName: 'login'
+})
+
+// or more options
+mpvueSimple.build({
+  output: {
+    path: 'mp-pages',
+    jsonpFunction: 'webpackJsonpMpvue' // optional config
+  },
+  pageName: 'login'
+})
+
+// maybe you want to do something after building
+mpvueSimple.build()  // => Promise
+.then(() => console.log('mpvue build success'))
+.catch(err => throw new Error(err))
+```
+
+## changelog
+
+#### `1.0.17`
+- 加入可选配置项 `output.jsonpFunction`，mpvue 打包构建后会在 `manifest.js` 中生生成全局的模块加载器函数 `global.webpackJsonp`，为防止和其它构建工具引起命名冲突，该默认函数名可在 output 配置中指定，示例如上。
+

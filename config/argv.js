@@ -132,7 +132,14 @@ function mergeArgvConfig (config) {
 
   // 输出文件夹
   if (argvOutput) {
-    const assetsRoot = path.resolve(argvOutput)
+    let outputPath =  argvOutput;
+    if (typeof argvOutput === 'object') {
+      outputPath = argvOutput.path;
+      config.argvConfig.output = Object.assign({}, argvOutput);
+      delete config.argvConfig.output.path;
+    }
+
+    const assetsRoot = path.resolve(outputPath)
     defConfig.assetsRoot = assetsRoot
   }
 
