@@ -45,8 +45,8 @@ mpvueSimple.build()  // => Promise
 
     ```javascript
   mpvueSimple.build({
-  	externals: {
-          sdk: 'require("../../../../sdk")', // 公共模块的相对路径
+      externals: {
+      	sdk: 'require("../../../../sdk")', // 公共模块的相对路径
       },
   })
     ```
