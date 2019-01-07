@@ -39,7 +39,7 @@ mpvueSimple.build()  // => Promise
 ## changelog
 #### `1.0.18`
 
-- 加入可选配置项 `external`，通过在webpack中增加external属性的方式，可以在打包的时候移除公共模块的引入，从而减小包大小。
+- 加入可选配置项 `externals`，通过在webpack中增加external属性的方式，可以在打包的时候移除公共模块的引入，从而减小包大小。
 
   在构建脚本中进行如下定义：
 
