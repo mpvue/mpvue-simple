@@ -39,6 +39,7 @@ module.exports = {
   resolveLoader: {
     modules
   },
+  externals: config.build.externals,
   module: {
     rules: [
       {
