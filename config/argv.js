@@ -101,6 +101,7 @@ function mergeArgvConfig (config) {
     output: argvOutput,               // pathString, undefined
     config: argvCnf,                  // pathString, undefined
     definePlugin: argvDefinePlugin,   // object, undefined
+    externals: argvExternals,         // object, undefined
     ...resetConfig
   } = argv
   const mpType = argvComponent ? 'component' : 'page'
@@ -141,6 +142,11 @@ function mergeArgvConfig (config) {
 
     const assetsRoot = path.resolve(outputPath)
     defConfig.assetsRoot = assetsRoot
+  }
+  
+  // 外部扩展
+  if (argvExternals && typeof argvExternals === 'object') {
+    defConfig.externals = argvExternals
   }
 
   const allEntry = Object.keys(defConfig.entry)

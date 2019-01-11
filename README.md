@@ -37,7 +37,30 @@ mpvueSimple.build()  // => Promise
 ```
 
 ## changelog
+#### `1.0.18`
+
+- 加入可选配置项 `externals`，通过在webpack中增加external属性的方式，可以在打包的时候移除公共模块的引入，从而减小包大小。
+
+  在构建脚本中进行如下定义：
+
+    ```javascript
+  mpvueSimple.build({
+      externals: {
+          sdk: 'require("../../../../sdk")', // 公共模块的相对路径
+      },
+  })
+    ```
+
+  在页面文件中进行如下引用：
+
+    ```javascript
+  import SDK from 'sdk'; // 注意这里的sdk，应为externals的key
+    ```
+
+
+
 
 #### `1.0.17`
+
 - 加入可选配置项 `output.jsonpFunction`，mpvue 打包构建后会在 `manifest.js` 中生生成全局的模块加载器函数 `global.webpackJsonp`，为防止和其它构建工具引起命名冲突，该默认函数名可在 output 配置中指定，示例如上。
 
