@@ -101,6 +101,7 @@ function mergeArgvConfig (config) {
     output: argvOutput,               // pathString, undefined
     config: argvCnf,                  // pathString, undefined
     definePlugin: argvDefinePlugin,   // object, undefined
+    removeMpvue: argvTidyMpvue,
     ...resetConfig
   } = argv
   const mpType = argvComponent ? 'component' : 'page'
@@ -149,6 +150,17 @@ function mergeArgvConfig (config) {
     }
   })
 
+  // 剔除mpvue
+  if (argvTidyMpvue) {
+    config.argvConfig.externals = [
+      function (context, request, callback) {
+        if (/^vue$/.test(request)) {
+          return callback(null, 'commonjs ' + request);
+        }
+        callback();
+      }
+    ];
+  }
   // DefinePlugin
   if (argvDefinePlugin) {
     config.argvConfig.plugins.push(new webpack.DefinePlugin(argvDefinePlugin))
